@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ジムニーランド - 請求書</title>
+    <style>
+        body {
+            font-family: 'Hiragino Sans', 'ヒラギノ角ゴシック', 'Yu Gothic', 'メイリオ', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .invoice-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #2c5aa0;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .company-name {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c5aa0;
+            margin-bottom: 10px;
+        }
+        .company-details {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+        .invoice-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .invoice-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        .invoice-details {
+            flex: 1;
+        }
+        .client-info {
+            flex: 1;
+            text-align: right;
+        }
+        .info-label {
+            font-weight: bold;
+            color: #2c5aa0;
+            margin-bottom: 5px;
+        }
+        .info-value {
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        .items-table th {
+            background-color: #2c5aa0;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+        .items-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .items-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .total-section {
+            text-align: right;
+            margin-top: 20px;
+        }
+        .total-row {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+        .total-label {
+            width: 200px;
+            text-align: right;
+            padding-right: 20px;
+            font-weight: bold;
+        }
+        .total-value {
+            width: 150px;
+            text-align: right;
+            font-weight: bold;
+        }
+        .grand-total {
+            font-size: 18px;
+            color: #2c5aa0;
+            border-top: 2px solid #2c5aa0;
+            padding-top: 10px;
+        }
+        .payment-info {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #2c5aa0;
+        }
+        .payment-info h3 {
+            color: #2c5aa0;
+            margin-top: 0;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <div class="header">
+            <div class="company-name">ジムニーランド</div>
+            <div class="company-details">
+                〒123-4567 東京都渋谷区○○1-2-3<br>
+                TEL: 03-1234-5678 | FAX: 03-1234-5679<br>
+                Email: info@jimnyland.co.jp | Web: https://jimnyland.co.jp
+            </div>
+        </div>
+
+        <div class="invoice-title">請求書</div>
+
+        <div class="invoice-info">
+            <div class="invoice-details">
+                <div class="info-label">請求書番号</div>
+                <div class="info-value" id="invoice-number">INV-2024-001</div>
+                <div class="info-label">請求日</div>
+                <div class="info-value" id="invoice-date">2024年1月15日</div>
+                <div class="info-label">支払期限</div>
+                <div class="info-value" id="due-date">2024年2月14日</div>
+            </div>
+            <div class="client-info">
+                <div class="info-label">請求先</div>
+                <div class="info-value" id="client-name">株式会社サンプル商事</div>
+                <div class="info-value" id="client-address">〒100-0001 東京都千代田区千代田1-1-1</div>
+                <div class="info-value" id="client-tel">TEL: 03-0000-0000</div>
+            </div>
+        </div>
+
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th style="width: 10%;">No.</th>
+                    <th style="width: 40%;">品名・サービス内容</th>
+                    <th style="width: 15%;">数量</th>
+                    <th style="width: 15%;">単価</th>
+                    <th style="width: 20%;">金額</th>
+                </tr>
+            </thead>
+            <tbody id="items-tbody">
+                <tr>
+                    <td>1</td>
+                    <td>ジムニー整備・点検サービス</td>
+                    <td>1</td>
+                    <td>¥15,000</td>
+                    <td>¥15,000</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>オイル交換</td>
+                    <td>1</td>
+                    <td>¥8,000</td>
+                    <td>¥8,000</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>タイヤ交換</td>
+                    <td>4</td>
+                    <td>¥12,000</td>
+                    <td>¥48,000</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="total-section">
+            <div class="total-row">
+                <div class="total-label">小計</div>
+                <div class="total-value" id="subtotal">¥71,000</div>
+            </div>
+            <div class="total-row">
+                <div class="total-label">消費税 (10%)</div>
+                <div class="total-value" id="tax">¥7,100</div>
+            </div>
+            <div class="total-row grand-total">
+                <div class="total-label">合計金額</div>
+                <div class="total-value" id="total">¥78,100</div>
+            </div>
+        </div>
+
+        <div class="payment-info">
+            <h3>お支払いについて</h3>
+            <p><strong>支払方法:</strong> 銀行振込</p>
+            <p><strong>振込先:</strong> 三菱UFJ銀行 渋谷支店 普通 1234567 ジムニーランド</p>
+            <p><strong>支払期限:</strong> 請求日から30日以内</p>
+            <p><strong>備考:</strong> 振込手数料はお客様にてご負担ください。</p>
+        </div>
+
+        <div class="footer">
+            <p>この請求書は自動生成されています。ご不明な点がございましたら、お気軽にお問い合わせください。</p>
+            <p>© 2024 ジムニーランド All Rights Reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
